@@ -142,6 +142,10 @@ void iniciarJuego()
     cin >> jugador2;
     cout << gestor->insertarJugadorALista(jugador2) << endl;
 
+    gestor->crearMazoCartas();
+    gestor->imprimirCartas();
+    gestor->rebajarCartas();
+    gestor->imprimirCartasBarajadas();
     imprimirMenuTurno(1);  
 }
 
