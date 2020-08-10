@@ -16,6 +16,7 @@ public:
     bool popElem();
     Carta pasarPilaACola();
     bool esVacia();
+    Carta obtenerCartaTope();
 
 protected:
     int longitud;

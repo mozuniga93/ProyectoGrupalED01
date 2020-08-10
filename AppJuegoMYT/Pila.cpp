@@ -73,3 +73,13 @@ Carta Pila::pasarPilaACola() {
 	}
 	return carta;
 }
+
+Carta Pila::obtenerCartaTope() {
+	NodoCarta* aux;
+	Carta carta;
+	if (!(this->esVacia())) {
+		aux = tope;
+		carta = tope->getCarta();
+	}
+	return carta;
+}

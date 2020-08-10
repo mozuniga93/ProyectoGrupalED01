@@ -20,6 +20,7 @@ public:
     int buscarPosicionJugador(string);
     bool eliminarJugadorPorPosicion(int);
     bool verificarListaVacia();
+    string buscarJugadorPosicion(int);
 
 protected:
     NodoJugador* cabeza;
