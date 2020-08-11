@@ -20,7 +20,6 @@ void imprimirMenuFinalJuego();
 void iniciarJuego();
 void tomarCartaPilaCentro(int);
 void tirarCarta(int);
-void mostrarCartasDisponiblesCola();
 void mostrarMejoresRecords();
 void guardarGanadores();
 string nombreJugadorTurnoActual(int);
@@ -259,18 +258,10 @@ void iniciarJuego()
     cin >> nombreJugador1;
     cout << gestor->insertarJugadorALista(nombreJugador1) << endl;
     cout << "Favor digite el nombre del jugador 2: " << flush;
-
-
-    gestor->crearMazoCartas();
-    gestor->imprimirCartas();
-    gestor->rebajarCartas();
-    gestor->pasarCartasBarajadasAPilaCartas();
-    //gestor->imprimirCartasBarajadas();
-    imprimirMenuTurno(1);  
     cin >> nombreJugador2;
     cout << gestor->insertarJugadorALista(nombreJugador2) << endl;
 
-    gestor->pasarCartasBarajadasAPilaCartas2();
+    gestor->pasarCartasBarajadasAPilaCartas();
     gestor->pasarPilaCartasAColas();
     validarTurno(1);  
 }
@@ -289,10 +280,6 @@ void tomarCartaPilaCentro(int pJugador) {
         cout << "Puntos totales del jugador 2: " << puntuacionJugador2 << endl;
         validarTurno(1);
     }
-}
-
-void mostrarCartasDisponiblesCola() {
-
 }
 
 void tirarCarta(int pJugador) {

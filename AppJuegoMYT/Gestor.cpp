@@ -2,13 +2,13 @@
 
 void Gestor::pasarCartasBarajadasAPilaCartas() {
 	//Se crea el mazo (array) de cartas pero de manera ordenada.
-	//crearMazoCartas();
+	crearMazoCartas();
 	//Se rebaja el mazo de cartas de manera random.
-	//rebajarCartas();
+	rebajarCartas();
 	//Ahora se debe pasar del array cartasBarajadas a la pila pilaCentro
-	for (int i = 0; i < 52; i++) {
-		pilaCentro.pushElem(cartasBarajadas[i]);
-		//cartasBarajadas[i] = cartasOrdenadas[posicionesAleatorias[i]];
+
+	for (int i = 0; i < (sizeof(cartasBarajadas) / sizeof(*cartasBarajadas)); i++) {
+		pilaCartas.pushElem(cartasBarajadas[i]);
 	}
 }
 
@@ -165,19 +165,6 @@ int Gestor::cantidadCartasPilaCartas() {
 	int resp = 0;
 	resp = pilaCartas.getLongitud();
 	return resp;
-}
-
-void Gestor::pasarCartasBarajadasAPilaCartas2() {
-	//Se crea el mazo (array) de cartas pero de manera ordenada.
-	crearMazoCartas();
-	//Se rebaja el mazo de cartas de manera random.
-	rebajarCartas();
-	//Ahora se debe pasar del array cartasBarajadas a la pila pilaCentro
-
-	for (int i = 0; i < (sizeof(cartasBarajadas) / sizeof(*cartasBarajadas)); i++) {
-		pilaCartas.pushElem(cartasBarajadas[i]);
-	}
-
 }
 
 int Gestor::tirarCartaAlCentro(int pjugador) {
