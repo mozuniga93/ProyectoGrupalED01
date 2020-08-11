@@ -146,7 +146,8 @@ void iniciarJuego()
     gestor->crearMazoCartas();
     gestor->imprimirCartas();
     gestor->rebajarCartas();
-    gestor->imprimirCartasBarajadas();
+    gestor->pasarCartasBarajadasAPilaCartas();
+    //gestor->imprimirCartasBarajadas();
     imprimirMenuTurno(1);  
 }
 
