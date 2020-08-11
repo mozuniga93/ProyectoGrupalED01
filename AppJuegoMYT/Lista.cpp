@@ -128,3 +128,27 @@ bool Lista::verificarListaVacia() {
     }
 }
 
+string Lista::buscarJugadorPosicion(int pPosicion) {
+    NodoJugador* aux, * ant;
+    string rslt = "";
+    int i;
+    if (getCabeza() == NULL) {
+        return rslt;
+    }
+    else {
+        for (i = 1, ant = 0, aux = getCabeza(); aux->getSig() != NULL, i < pPosicion; i++) {
+            ant = aux;
+            aux = aux->getSig();
+        }
+
+        if (ant != 0) {
+            ant->setSig(aux->getSig());
+        }
+        else {
+            setCabeza(aux->getSig());
+        }
+
+        rslt = aux->getJugador();
+        return rslt;
+    }
+}

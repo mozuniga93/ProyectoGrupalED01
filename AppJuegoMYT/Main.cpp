@@ -10,16 +10,18 @@ using namespace std;
 //PROTOTIPO DE MENUS
 void imprimirMenuPrincipal();
 int menuPrincipal(int);
-void imprimirMenuTurno(int);
-int menuTurno(int);
+void imprimirMenuTurno(int,int);
+void validarTurno(int);
+int menuTurno(int,int);
 
 //PROTOTIPOS METODOS DEL JUEGO
 void iniciarJuego();
 void tomarCartaPilaCentro();
-void tirarCarta();
+void tirarCarta(int);
 void mostrarCartasDisponiblesCola();
 void mostrarMejoresRecords();
 void guardarGanadores();
+string nombreJugadorTurnoActual(int);
 
 //VARIABLES ESTATICAS
 static Gestor* gestor = new Gestor();
@@ -27,6 +29,8 @@ static int jugadorActual = 1;
 static string nombreJugadorActual;
 static int puntuacionJugador1 = 0;
 static int puntuacionJugador2 = 0;
+static string nombreJugador1;
+static string nombreJugador2;
 
 int main()
 {
@@ -84,13 +88,13 @@ int menuPrincipal(int answer)
     return answer;
 }
 
-void imprimirMenuTurno(int pjugadorTurnoActual)
-{
+void imprimirMenuTurno(int popcion, int pjugadorTurnoActual) {
     int answer;
     bool keepLooping = true;
-
     do
     {
+        cout << "-------------------------------------" << endl;
+        cout << "Turno del jugador " << nombreJugadorTurnoActual(pjugadorTurnoActual) << endl;
         cout << "-------------------------------------" << endl;
         cout << "Favor digite una opcion:" << endl;
         cout << "1. Tomar una carta de pila de cartas." << endl;
@@ -99,7 +103,7 @@ void imprimirMenuTurno(int pjugadorTurnoActual)
         cout << "-------------------------------------" << endl;
         cin >> answer;
 
-        menuTurno(answer);
+        menuTurno(answer, pjugadorTurnoActual);
 
         if (answer == 0)
         {
@@ -112,7 +116,29 @@ void imprimirMenuTurno(int pjugadorTurnoActual)
     } while (keepLooping);
 }
 
-int menuTurno(int answer)
+void validarTurno(int pjugadorTurnoActual)
+{
+    int cantCartasPilaCentro = gestor->cantidadCartasPilaCentro();
+    int cantCartasPilaCartas = gestor->cantidadCartasPilaCartas();
+    int cantCartasCola = gestor->cantidadCartasCola(pjugadorTurnoActual);
+    gestor->imprimirTablero(pjugadorTurnoActual);
+    if (cantCartasPilaCentro == 52) {
+
+    }
+    else {
+        if (cantCartasCola>0 && cantCartasPilaCartas >0) {
+            imprimirMenuTurno(1, pjugadorTurnoActual);
+        }
+        else if (cantCartasCola == 0 && cantCartasPilaCentro>0) {
+            
+        }
+        else if (cantCartasCola>0 && cantCartasPilaCentro == 0) {
+           
+        }
+    }
+}
+
+int menuTurno(int answer, int pjugador)
 {
     switch (answer)
     {
@@ -120,7 +146,7 @@ int menuTurno(int answer)
         tomarCartaPilaCentro();
         break;
     case 2:
-        tirarCarta();
+        tirarCarta(pjugador);
         break;
     case 0:
         cout << "Gracias por usar el sistema." << endl;
@@ -134,14 +160,11 @@ int menuTurno(int answer)
 //METODOS DEL JUEGO
 void iniciarJuego()
 {
-    string jugador1;
-    string jugador2;
     cout << "Favor digite el nombre del jugador 1: " << flush;
-    cin >> jugador1;
-    cout << gestor->insertarJugadorALista(jugador1) << endl;
+    cin >> nombreJugador1;
+    cout << gestor->insertarJugadorALista(nombreJugador1) << endl;
     cout << "Favor digite el nombre del jugador 2: " << flush;
-    cin >> jugador2;
-    cout << gestor->insertarJugadorALista(jugador2) << endl;
+
 
     gestor->crearMazoCartas();
     gestor->imprimirCartas();
@@ -149,18 +172,31 @@ void iniciarJuego()
     gestor->pasarCartasBarajadasAPilaCartas();
     //gestor->imprimirCartasBarajadas();
     imprimirMenuTurno(1);  
+    cin >> nombreJugador2;
+    cout << gestor->insertarJugadorALista(nombreJugador2) << endl;
+
+    gestor->pasarCartasBarajadasAPilaCartas2();
+    gestor->pasarPilaCartasAColas();
+    validarTurno(1);  
 }
 
 void tomarCartaPilaCentro() {
-    cout << "Tomaste una carta del centro." << endl;
+    cout << "Tomaste una carta de la pila." << endl;
 }
 
 void mostrarCartasDisponiblesCola() {
 
 }
 
-void tirarCarta() {
-    cout << "Tiraste una carta al centro." << endl;
+void tirarCarta(int pJugador) {
+    int puntosObtenidos = gestor->tirarCartaAlCentro(pJugador);
+    cout << "Puntos obtenidos: " << puntosObtenidos << endl;
+    if (pJugador == 1) {
+        validarTurno(2);
+    }
+    else {
+        validarTurno(1);
+    }
 }
 
 void mostrarMejoresRecords() {
@@ -169,4 +205,15 @@ void mostrarMejoresRecords() {
 
 void guardarGanadores() {
 
+}
+
+string nombreJugadorTurnoActual(int pjugadorTurnoActual) {
+    string nombreJugadorActual = "";
+    if (pjugadorTurnoActual == 1) {
+        nombreJugadorActual = nombreJugador1;
+    }
+    else {
+        nombreJugadorActual = nombreJugador2;
+    }
+    return nombreJugadorActual;
 }
