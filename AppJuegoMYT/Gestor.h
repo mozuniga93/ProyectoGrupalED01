@@ -35,7 +35,6 @@ public:
     void imprimirCartas();
     void imprimirCartasBarajadas();
     //METODOS MONICA
-    void pasarCartasBarajadasAPilaCartas2();
     void pasarPilaCartasAColas();
     bool validarColaNoVacia(int);
     int cantidadCartasCola(int);
