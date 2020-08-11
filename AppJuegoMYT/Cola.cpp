@@ -44,7 +44,7 @@ void Cola::insertarElem(Carta pcarta) {
 
 bool Cola::esVacia() {
 	bool colaVacia = false;
-	if (getFrente() == NULL && getFinal() == NULL) {
+	if (getFrente() == NULL) {
 		colaVacia = true;
 	}
 	return colaVacia;
