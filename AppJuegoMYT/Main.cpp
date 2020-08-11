@@ -164,6 +164,14 @@ void iniciarJuego()
     cin >> nombreJugador1;
     cout << gestor->insertarJugadorALista(nombreJugador1) << endl;
     cout << "Favor digite el nombre del jugador 2: " << flush;
+
+
+    gestor->crearMazoCartas();
+    gestor->imprimirCartas();
+    gestor->rebajarCartas();
+    gestor->pasarCartasBarajadasAPilaCartas();
+    //gestor->imprimirCartasBarajadas();
+    imprimirMenuTurno(1);  
     cin >> nombreJugador2;
     cout << gestor->insertarJugadorALista(nombreJugador2) << endl;
 

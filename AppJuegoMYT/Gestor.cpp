@@ -2,11 +2,14 @@
 
 void Gestor::pasarCartasBarajadasAPilaCartas() {
 	//Se crea el mazo (array) de cartas pero de manera ordenada.
-	crearMazoCartas();
+	//crearMazoCartas();
 	//Se rebaja el mazo de cartas de manera random.
-	rebajarCartas();
+	//rebajarCartas();
 	//Ahora se debe pasar del array cartasBarajadas a la pila pilaCentro
-
+	for (int i = 0; i < 52; i++) {
+		pilaCentro.pushElem(cartasBarajadas[i]);
+		//cartasBarajadas[i] = cartasOrdenadas[posicionesAleatorias[i]];
+	}
 }
 
 void Gestor::crearMazoCartas() {
