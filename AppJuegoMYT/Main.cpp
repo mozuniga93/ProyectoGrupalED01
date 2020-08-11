@@ -334,6 +334,7 @@ void terminarJuego() {
     imprimirMenuFinalJuego();
 }
 
+//METODOS YESLIN 
 void mostrarMejoresRecords() {
 
 }
