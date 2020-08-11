@@ -37,14 +37,16 @@ public:
     //METODOS MONICA
     void pasarCartasBarajadasAPilaCartas2();
     void pasarPilaCartasAColas();
-    bool validarColaNoVacia(int pjugador);
-    int cantidadCartasCola(int pjugador);
-    string nombreJugador(int pjugador);
+    bool validarColaNoVacia(int);
+    int cantidadCartasCola(int);
+    string nombreJugador(int);
     bool validarPilaCentroNoVacia();
+    bool validarPilaCartasNoVacia();
     int cantidadCartasPilaCentro();
     int cantidadCartasPilaCartas();
-    int tirarCartaAlCentro(int pjugador);
-    void imprimirTablero(int pjugador);
+    int tirarCartaAlCentro(int);
+    int tomarCartaPilaCartas(int);
+    void imprimirTablero(int, string, int);
     //METODOS YESLIN
 };
 

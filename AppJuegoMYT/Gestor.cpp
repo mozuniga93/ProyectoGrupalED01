@@ -146,6 +146,12 @@ bool Gestor::validarPilaCentroNoVacia() {
 	return rslt;
 }
 
+bool Gestor::validarPilaCartasNoVacia() {
+	bool rslt;
+	rslt = pilaCartas.esVacia();
+	return rslt;
+}
+
 int Gestor::cantidadCartasPilaCentro() {
 	int resp = 0;
 	resp = pilaCentro.getLongitud();
@@ -200,7 +206,37 @@ int Gestor::tirarCartaAlCentro(int pjugador) {
 	return puntosObtenidos;
 }
 
-void Gestor::imprimirTablero(int pjugador) {
+int Gestor::tomarCartaPilaCartas(int pjugador) {
+	Carta carta = Carta();
+	int puntos = 0;
+	if (!validarPilaCartasNoVacia()) {
+		if (cantidadCartasCola(pjugador) == 0) {
+			carta = pilaCartas.pasarPilaACola();
+			if (pjugador == 1) {
+				colaJugador1.insertarElem(carta);
+				puntos = -2;
+			}
+			else {
+				colaJugador2.insertarElem(carta);
+				puntos = -2;
+			}
+		}
+		else {
+			carta = pilaCartas.pasarPilaACola();
+			if (pjugador == 1) {
+				colaJugador1.insertarElem(carta);
+				puntos = 0;
+			}
+			else {
+				colaJugador2.insertarElem(carta);
+				puntos = 0;
+			}
+		}
+		return puntos;
+   }
+}
+
+void Gestor::imprimirTablero(int pjugador, string nombreJugador, int puntosAcum) {
 	string carta = "";
 	Carta cartaTopePilaCentro = Carta();
 	cartaTopePilaCentro = pilaCentro.obtenerCartaTope();
@@ -211,28 +247,29 @@ void Gestor::imprimirTablero(int pjugador) {
 
 	if (!validarPilaCentroNoVacia()) {
 		if (valorCartaTope == 1) {
-			carta = "A    ";
+			carta = "  A    ";
 		}
 		else if (valorCartaTope == 11) {
-			carta = "J    ";
+			carta = "  J    ";
 		}
 		else if (valorCartaTope == 12) {
-			carta = "Q    ";
+			carta = "  Q    ";
 		}
 		else if (valorCartaTope == 13) {
-			carta = "K    ";
+			carta = "  K    ";
 		}
 		else {
-			carta += to_string(valorCartaTope) + "     ";
+			carta += "  " + to_string(valorCartaTope) + "     ";
 		}
 	}
 	else {
 		carta = "-------";
 		signo = "-------";
 	}
-
 		cout << "_________________________________________________________________________________________" << endl;
-		cout << "                                ESTATUS DEL JUEGO " << endl;
+		cout << "Turno del jugador: " << nombreJugador << "                 ||                        Puntos acumulados: " << puntosAcum << endl;
+		cout << "_________________________________________________________________________________________" << endl;
+		cout << "                                   Estatus del juego " << endl;
 		cout << "_________________________________________________________________________________________" << endl;
 		cout << " COLA DEL JUGADOR                    PILA DEL CENTRO                    PILA DE CARTA" << endl;
 		cout << "  Cant cartas                           " << carta << "                          Cant cartas" << endl;
